@@ -1,13 +1,13 @@
 /*	Author: lab
  *  Partner(s) Name: Luofeng Xu
  *	Lab Section:
- *	Assignment: Lab 13  Exercise 5
- *	Exercise Description: [optional - include for your own benefit]
- *
+ *	Assignment: Lab 13  Exercise 4
+ *	Exercise Description: I have an alternate solution, with two SMs control U/D and L/R, the demo video will be in my youtube channel, and here's the link for that:https://youtu.be/64-FlBYc1qs
+ *				Not sure which one is suitable for the requirement, but this one will looks a little bit better.
  *	I acknowledge all content contained herein, excluding template or example
  *	code, is my own original work.
  *
- *	Demo Link: Youtube URL>https://youtu.be/ak6MfET5wJ8
+ *	Demo Link: Youtube URL>https://youtu.be/5NubqPY1XIA
  */
 #include <avr/io.h>
 #include <avr/interrupt.h>
@@ -29,8 +29,8 @@ typedef struct task{
         int(*TickFct)(int);
 }task;
 
-task tasks[3];
-const unsigned short tasksNum=3;
+task tasks[2];
+const unsigned short tasksNum=2;
 const unsigned long tasksPeriod=1;
 volatile unsigned char TimerFlag = 0; 
 unsigned long _avr_timer_M = 1; 
@@ -99,8 +99,8 @@ int Shift_Tick(int state){
 	}
 	return state;
 }
-unsigned char sp1=20;
-unsigned char sp2=20;
+unsigned char sp1=2;
+unsigned char sp2=2;
 enum Speed_States{speed};
 int Speed_Tick(int state1){
 	switch(state1){
@@ -420,12 +420,12 @@ int main(void) {
 	tasks[i].elapsedTime=0;
 	tasks[i].TickFct=&Shift_Tick;
 	i++;
-	tasks[i].state=speed;
+/*	tasks[i].state=speed;
         tasks[i].period=1;
         tasks[i].elapsedTime=0;
         tasks[i].TickFct=&Speed_Tick;
 	i++;
-/*	tasks[i].state=start2;
+	tasks[i].state=start2;
         tasks[i].period=50;
         tasks[i].elapsedTime=0;
         tasks[i].TickFct=&LED2_Tick;
